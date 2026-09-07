@@ -1,6 +1,6 @@
-package dev.dulciobernardo7.CadastroDePessoas.Pessoas;
+package dev.dulciobernardo7.CadastroDePessoas.Entity;
 
-import dev.dulciobernardo7.CadastroDePessoas.Tarefas.TarefasModel;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.TarefasModel;
 import jakarta.persistence.*;
 import lombok.*;
 

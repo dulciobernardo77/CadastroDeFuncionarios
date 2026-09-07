@@ -1,5 +1,9 @@
-package dev.dulciobernardo7.CadastroDePessoas.Pessoas;
+package dev.dulciobernardo7.CadastroDePessoas.Service;
 
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.PessoaDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.PessoaModel;
+import dev.dulciobernardo7.CadastroDePessoas.mapper.PessoaMapper;
+import dev.dulciobernardo7.CadastroDePessoas.Repository.PessoasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +28,8 @@ public class PessoaService {
     }
 
     //Metodo para lista todo as pessoas pelo id
-    public PessoaDTO ListatodasPessoasporId(Long number){
-      Optional<PessoaModel> pessoaModel = pessoasRepository.findById(number);
+    public PessoaDTO ListatodasPessoasporId(Long id){
+      Optional<PessoaModel> pessoaModel = pessoasRepository.findById(id);
       return  pessoaModel.map(pessoaMapper::map)
               .orElse(null);
     }
@@ -38,16 +42,16 @@ public class PessoaService {
     }
 
     //Metodo para eliminar  fucionario
-    public void ExcluirPessoaPorId(Long number){
-        pessoasRepository.deleteById(number);
+    public void ExcluirPessoaPorId(Long id){
+        pessoasRepository.deleteById(id);
     }
 
-    // Metodo para Alterar dados dos ninjas (UPDATE)
-    public  PessoaDTO Atualizarfuncionario(Long number, PessoaDTO pessoaDTO){
-        Optional<PessoaModel> pessoaExistente = pessoasRepository.findById(number);
+    // Metodo para Alterar dados dos funcionarios (UPDATE)
+    public  PessoaDTO Atualizarfuncionario(Long id, PessoaDTO pessoaDTO){
+        Optional<PessoaModel> pessoaExistente = pessoasRepository.findById(id);
         if (pessoaExistente.isPresent()){
             PessoaModel pessoaAtualizada = pessoaMapper.map(pessoaDTO);
-            pessoaAtualizada.setId(number);
+            pessoaAtualizada.setId(id);
             PessoaModel pessoaSalva = pessoasRepository.save(pessoaAtualizada);
             return pessoaMapper.map(pessoaSalva) ;
         }

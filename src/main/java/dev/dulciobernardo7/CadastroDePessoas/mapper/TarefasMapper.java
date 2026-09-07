@@ -1,13 +1,15 @@
-package dev.dulciobernardo7.CadastroDePessoas.Tarefas;
+package dev.dulciobernardo7.CadastroDePessoas.mapper;
 
 
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.TarefasModel;
 import lombok.experimental.UtilityClass;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TarefasMapper {
 
-    public  TarefasModel map(TarefasDTO tarefasDTO){
+    public TarefasModel map(TarefasDTO tarefasDTO){
         return TarefasModel
                 .builder()
                 .id(tarefasDTO.getId())

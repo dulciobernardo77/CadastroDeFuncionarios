@@ -1,6 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Pessoas;
+package dev.dulciobernardo7.CadastroDePessoas.mapper;
 
-import lombok.experimental.UtilityClass;
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.PessoaDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.PessoaModel;
 import org.springframework.stereotype.Component;
 
 

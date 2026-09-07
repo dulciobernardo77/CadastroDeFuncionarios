@@ -1,6 +1,10 @@
-package dev.dulciobernardo7.CadastroDePessoas.Tarefas;
+package dev.dulciobernardo7.CadastroDePessoas.Service;
 
 
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.TarefasModel;
+import dev.dulciobernardo7.CadastroDePessoas.Repository.TarefasRepository;
+import dev.dulciobernardo7.CadastroDePessoas.mapper.TarefasMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +32,8 @@ public class TarefasService {
     }
 
     //Metodo para lista todo as Tarefas pelo id
-   public TarefasDTO ListatodasTarefasPorId(Long number){
-        Optional<TarefasModel> tarefasModel = tarefasRepository.findById(number);
+   public TarefasDTO ListatodasTarefasPorId(Long id){
+        Optional<TarefasModel> tarefasModel = tarefasRepository.findById(id);
         return tarefasModel.map(tarefasMapper::map)
                 .orElse(null);
     }
@@ -42,11 +46,11 @@ public class TarefasService {
 
 
     // Metodo para Alterar dados das Tarefas (UPDATE)
-    public TarefasDTO AtualizarTarefas(Long number ,TarefasDTO tarefasDTO){
-        Optional<TarefasModel> tarefasExistente = tarefasRepository.findById(number);
+    public TarefasDTO AtualizarTarefas(Long id ,TarefasDTO tarefasDTO){
+        Optional<TarefasModel> tarefasExistente = tarefasRepository.findById(id);
         if (tarefasExistente.isPresent()){
             TarefasModel tarefasAtualizadas = tarefasMapper.map(tarefasDTO);
-            tarefasAtualizadas.setId(number);
+            tarefasAtualizadas.setId(id);
             TarefasModel tarefaSalvas = tarefasRepository.save(tarefasAtualizadas);
             return tarefasMapper.map(tarefaSalvas);
         }
@@ -54,8 +58,8 @@ public class TarefasService {
     }
 
     //Metodo para Deletar Tarefas (DELETE)
-    public void ExcluirTarefasPorId(Long number){
-        tarefasRepository.deleteById(number);
+    public void ExcluirTarefasPorId(Long id){
+        tarefasRepository.deleteById(id);
     }
 
 

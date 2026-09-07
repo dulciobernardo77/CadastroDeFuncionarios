@@ -1,5 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Tarefas;
+package dev.dulciobernardo7.CadastroDePessoas.Controller;
 
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Service.TarefasService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -50,13 +52,13 @@ public class TarefasController {
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada.")
     })
     public ResponseEntity<String> MostrarTodasPessoasPorId(
-            @Parameter(name = "number", description = "ID da tarefa", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number) {
-        TarefasDTO tarefasDTO = tarefasService.ListatodasTarefasPorId(number);
+            @Parameter(name = "id", description = "ID da tarefa", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id) {
+        TarefasDTO tarefasDTO = tarefasService.ListatodasTarefasPorId(id);
         if (tarefasDTO != null) {
             return ResponseEntity.ok("Tarefa  encontrado: " + tarefasDTO.getNomeDaTarefa());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + id + " Nao encontrado");
         }
     }
 
@@ -67,14 +69,14 @@ public class TarefasController {
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada para atualização.")
     })
     public ResponseEntity<?> AlteraPorId(
-            @Parameter(name = "number", description = "ID da tarefa a ser atualizada", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number,
+            @Parameter(name = "id", description = "ID da tarefa a ser atualizada", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id,
             @RequestBody TarefasDTO tarefas) {
-        TarefasDTO tarefasDTO = tarefasService.AtualizarTarefas(number, tarefas);
+        TarefasDTO tarefasDTO = tarefasService.AtualizarTarefas(id, tarefas);
         if (tarefasDTO != null) {
             return ResponseEntity.ok(tarefasDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + id + " Nao encontrado");
         }
     }
 
@@ -85,13 +87,13 @@ public class TarefasController {
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada para exclusão.")
     })
     public ResponseEntity<String> ExcluirPessoaPorId(
-            @Parameter(name = "number", description = "ID da tarefa a ser excluída", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number) {
-        if (tarefasService.ListatodasTarefasPorId(number) != null) {
-            tarefasService.ExcluirTarefasPorId(number);
-            return ResponseEntity.ok("O funcionario  com o IDs " + number + " Excluido.");
+            @Parameter(name = "id", description = "ID da tarefa a ser excluída", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id) {
+        if (tarefasService.ListatodasTarefasPorId(id) != null) {
+            tarefasService.ExcluirTarefasPorId(id);
+            return ResponseEntity.ok("O funcionario  com o IDs " + id + " Excluido.");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + id + " Nao encontrado");
         }
     }
 }

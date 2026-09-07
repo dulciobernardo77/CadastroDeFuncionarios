@@ -1,5 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Pessoas;
+package dev.dulciobernardo7.CadastroDePessoas.Controller;
 
+import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.PessoaDTO;
+import dev.dulciobernardo7.CadastroDePessoas.Service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -54,14 +56,14 @@ public class PessoaController {
             @ApiResponse(responseCode = "404", description = "Pessoa não encontrada.")
     })
     public ResponseEntity<String> mostrarTodasPessoasPorId(
-            @Parameter(name = "number", description = "ID da pessoa", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number) {
+            @Parameter(name = "id", description = "ID da pessoa", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id) {
 
-        PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(number);
+        PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(id);
         if (pessoaDTO != null) {
-            return ResponseEntity.ok("Funcionario com o IDs " + number + " encontrado: " + pessoaDTO.getNome());
+            return ResponseEntity.ok("Funcionario com o IDs " + id + " encontrado: " + pessoaDTO.getNome());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + id + " Nao encontrado");
         }
     }
 
@@ -72,14 +74,14 @@ public class PessoaController {
             @ApiResponse(responseCode = "404", description = "Pessoa não encontrada para atualização.")
     })
     public ResponseEntity<?> AlteraPorId(
-            @Parameter(name = "number", description = "ID da pessoa a ser atualizada", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number,
+            @Parameter(name = "id", description = "ID da pessoa a ser atualizada", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id,
             @RequestBody PessoaDTO pessoa) {
-        PessoaDTO pessoaDTO = pessoaService.Atualizarfuncionario(number, pessoa);
+        PessoaDTO pessoaDTO = pessoaService.Atualizarfuncionario(id, pessoa);
         if (pessoaDTO != null) {
             return ResponseEntity.ok(pessoaDTO);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + id + " Nao encontrado");
         }
     }
 
@@ -90,13 +92,13 @@ public class PessoaController {
             @ApiResponse(responseCode = "404", description = "Pessoa não encontrada para exclusão.")
     })
     public ResponseEntity<String> ExcluirPessoaPorId(
-            @Parameter(name = "number", description = "ID da pessoa a ser excluída", required = true, in = ParameterIn.PATH)
-            @PathVariable Long number) {
-        if (pessoaService.ListatodasPessoasporId(number) != null) {
-            pessoaService.ExcluirPessoaPorId(number);
-            return ResponseEntity.ok("O funcionario  com o IDs " + number + " Excluido.");
+            @Parameter(name = "id", description = "ID da pessoa a ser excluída", required = true, in = ParameterIn.PATH)
+            @PathVariable Long id) {
+        if (pessoaService.ListatodasPessoasporId(id) != null) {
+            pessoaService.ExcluirPessoaPorId(id);
+            return ResponseEntity.ok("O funcionario  com o IDs " + id + " Excluido.");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + number + " Nao encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + id + " Nao encontrado");
         }
     }
 }

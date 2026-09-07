@@ -1,7 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Tarefas;
+package dev.dulciobernardo7.CadastroDePessoas.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.dulciobernardo7.CadastroDePessoas.Pessoas.PessoaModel;
+import dev.dulciobernardo7.CadastroDePessoas.Entity.PessoaModel;
 import jakarta.persistence.*;
 import lombok.*;
 
