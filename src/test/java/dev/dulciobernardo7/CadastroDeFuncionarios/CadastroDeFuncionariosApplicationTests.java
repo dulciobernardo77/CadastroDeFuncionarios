@@ -1,10 +1,10 @@
-package dev.dulciobernardo7.CadastroDePessoas;
+package dev.dulciobernardo7.CadastroDeFuncionarios;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CadastroDeNinjasApplicationTests {
+class CadastroDeFuncionariosApplicationTests {
 
 	@Test
 	void contextLoads() {
