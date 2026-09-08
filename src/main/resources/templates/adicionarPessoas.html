@@ -267,11 +267,11 @@
 
         <div class="form-group">
             <label for="sexo">Sexo</label>
-            <input
-                    type="text"
-                    id="sexo"
-                    th:field="*{sexo}"
-                    placeholder="Ex: Masculino">
+            <select id="sexo" th:field="*{sexo}" required>
+                <option value="">Selecione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
         </div>
 
         <div class="form-group">

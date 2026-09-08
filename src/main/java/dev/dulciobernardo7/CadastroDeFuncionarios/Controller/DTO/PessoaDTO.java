@@ -13,10 +13,10 @@ public class PessoaDTO {
 
     private Long id;
     private String nome ;
-    private   int idade;
+    private int idade;
     private String nacionalidade;
     private String bi;
-    private char sexo;
+    private Character sexo;
     private String email;
     private String telefone;
     private String nivel;

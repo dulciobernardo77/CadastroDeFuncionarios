@@ -6,7 +6,7 @@ import lombok.*;
 
 //Entity ele transforma uma classe em entidade do banco de dados
 @Entity
-@Table(name = "tb_Cadastro_de_Pessoas")
+@Table(name = "tb_Pessoas")
 @Builder
 @Data
 @NoArgsConstructor
@@ -32,7 +32,7 @@ public class PessoaModel {
     private String bi;
 
     @Column(name = "sexo")
-    private char sexo;
+    private Character sexo;
 
     @Column(unique = true)
     private String email;
@@ -43,7 +43,7 @@ public class PessoaModel {
     @Column(name = "nivel")
     private String nivel;
 
-    @Column(name = "imgUrl")
+    @Column(name = "img_Url")
     private String imgUrl;
 
     //@ManyToOne - um pessoa tem uma unica tarefa
