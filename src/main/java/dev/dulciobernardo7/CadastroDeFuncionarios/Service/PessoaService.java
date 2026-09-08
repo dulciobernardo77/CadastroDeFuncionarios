@@ -1,9 +1,9 @@
-package dev.dulciobernardo7.CadastroDePessoas.Service;
+package dev.dulciobernardo7.CadastroDeFuncionarios.Service;
 
-import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.PessoaDTO;
-import dev.dulciobernardo7.CadastroDePessoas.Entity.PessoaModel;
-import dev.dulciobernardo7.CadastroDePessoas.mapper.PessoaMapper;
-import dev.dulciobernardo7.CadastroDePessoas.Repository.PessoasRepository;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.PessoaDTO;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Entity.PessoaModel;
+import dev.dulciobernardo7.CadastroDeFuncionarios.mapper.PessoaMapper;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Repository.PessoasRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

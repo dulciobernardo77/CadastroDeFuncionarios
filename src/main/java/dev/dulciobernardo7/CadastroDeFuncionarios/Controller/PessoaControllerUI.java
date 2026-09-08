@@ -1,8 +1,8 @@
-package dev.dulciobernardo7.CadastroDePessoas.Controller;
+package dev.dulciobernardo7.CadastroDeFuncionarios.Controller;
 
 
-import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.PessoaDTO;
-import dev.dulciobernardo7.CadastroDePessoas.Service.PessoaService;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.PessoaDTO;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Service.PessoaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

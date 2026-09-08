@@ -1,9 +1,8 @@
-package dev.dulciobernardo7.CadastroDePessoas.mapper;
+package dev.dulciobernardo7.CadastroDeFuncionarios.mapper;
 
 
-import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
-import dev.dulciobernardo7.CadastroDePessoas.Entity.TarefasModel;
-import lombok.experimental.UtilityClass;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.*;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Entity.*;
 import org.springframework.stereotype.Component;
 
 @Component

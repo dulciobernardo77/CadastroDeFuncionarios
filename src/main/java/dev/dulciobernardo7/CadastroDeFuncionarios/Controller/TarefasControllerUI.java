@@ -1,7 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Controller;
+package dev.dulciobernardo7.CadastroDeFuncionarios.Controller;
 
-import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
-import dev.dulciobernardo7.CadastroDePessoas.Service.TarefasService;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.TarefasDTO;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Service.TarefasService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

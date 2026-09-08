@@ -1,6 +1,6 @@
-package dev.dulciobernardo7.CadastroDePessoas.Controller.DTO;
+package dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO;
 
-import dev.dulciobernardo7.CadastroDePessoas.Entity.PessoaModel;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

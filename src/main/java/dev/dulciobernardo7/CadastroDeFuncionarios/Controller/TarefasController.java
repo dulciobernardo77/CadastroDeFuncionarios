@@ -1,7 +1,7 @@
-package dev.dulciobernardo7.CadastroDePessoas.Controller;
+package dev.dulciobernardo7.CadastroDeFuncionarios.Controller;
 
-import dev.dulciobernardo7.CadastroDePessoas.Controller.DTO.TarefasDTO;
-import dev.dulciobernardo7.CadastroDePessoas.Service.TarefasService;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.*;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Service.TarefasService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
