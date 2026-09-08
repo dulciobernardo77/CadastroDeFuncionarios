@@ -12,16 +12,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "pessoas")
 public class TarefasModel {
 
     //Atributos da classe tarefa
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nomedatarefas")
+    @Column(name = "nome_da_tarefa")
     private String nomeDaTarefa;
 
     @Column(name = "dificuldade")

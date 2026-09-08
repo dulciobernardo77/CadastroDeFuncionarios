@@ -6,9 +6,9 @@ CREATE TABLE tb_pessoas(
     bi VARCHAR(30) UNIQUE,
     sexo CHAR(1),
     email VARCHAR(255) UNIQUE,
-    telefone VARCHAR(14) UNIQUE,
+    telefone VARCHAR(20) UNIQUE,
     nivel VARCHAR(20),
-    imgUrl VARCHAR(500),
+    img_Url VARCHAR(500),
     tarefas_id INTEGER,
 
     CONSTRAINT fk_pessoa_tarefa
