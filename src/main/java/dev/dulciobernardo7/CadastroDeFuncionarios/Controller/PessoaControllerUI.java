@@ -3,6 +3,7 @@ package dev.dulciobernardo7.CadastroDeFuncionarios.Controller;
 
 import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.PessoaDTO;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Service.PessoaService;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Service.TarefasService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.List;
 public class PessoaControllerUI {
 
     private final PessoaService pessoaService;
+    private final TarefasService tarefasService;
 
-    public PessoaControllerUI(PessoaService pessoaService) {
+    public PessoaControllerUI(PessoaService pessoaService, TarefasService tarefasService) {
         this.pessoaService = pessoaService;
+        this.tarefasService = tarefasService;
     }
 
     @GetMapping("/lista")
@@ -48,14 +51,33 @@ public class PessoaControllerUI {
 
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionarFuncionario(Model model) {
-        model.addAttribute("pessoas", new PessoaDTO());
+        model.addAttribute("pessoas",new PessoaDTO());
+        model.addAttribute("tarefas", tarefasService.ListatodasTarefas());
         return "adicionarPessoas";
     }
 
-    @PostMapping("/salvar")
-    public String salvarPessoa(@ModelAttribute PessoaDTO pessoaDTO, RedirectAttributes redirectAttributes) {
-        pessoaService.cadastroDeFuncionario(pessoaDTO);
-        redirectAttributes.addFlashAttribute("mensagem", "Funcionario cadastrado com sucesso!");
+    @GetMapping("/altera/{number}")
+    public String mostrarFormularioAlteradoFuncionario(@PathVariable Long number, Model model) {
+        PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(number);
+        if (pessoaDTO == null) {
+            return "redirect:/pessoas/ui/lista";
+        }
+
+        model.addAttribute("pessoas", pessoaDTO);
+        model.addAttribute("tarefas", tarefasService.ListatodasTarefas());
+        return "alterarPessoas";
+    }
+
+    @PostMapping("/alterar/{number}")
+    public String alterarPessoa(@PathVariable Long number,
+                                @ModelAttribute PessoaDTO pessoaDTO,
+                                RedirectAttributes redirectAttributes) {
+        try {
+            pessoaService.Atualizarfuncionario(number, pessoaDTO);
+            redirectAttributes.addFlashAttribute("mensagem", "Funcionario alterado com sucesso!");
+        } catch (IllegalArgumentException exception) {
+            redirectAttributes.addFlashAttribute("mensagem", exception.getMessage());
+        }
         return "redirect:/pessoas/ui/lista";
     }
 }

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alterar dados dos Funcionario</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #f4f7f5, #e8f1eb);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: #26332a;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #777;
+            font-size: 15px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 620px;
+            margin: 0 auto;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9eee9;
+        }
+
+        .mensagem {
+            background-color: #e9f7ee;
+            color: #2e7d46;
+            border: 1px solid #b9e2c6;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            margin-bottom: 7px;
+            color: #444;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d8ded9;
+            border-radius: 8px;
+            background-color: #fafbfa;
+            color: #333;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        input:focus {
+            background-color: #fff;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.12);
+        }
+
+        .button-container {
+            grid-column: 1 / -1;
+            margin-top: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #4CAF50, #43a047);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.25);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #43a047, #388e3c);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(76, 175, 80, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            display: block;
+            width: fit-content;
+            margin: 22px auto 0;
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #388e3c;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 25px 15px;
+            }
+
+            .page-header h1 {
+                font-size: 26px;
+            }
+
+            .form-container {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .form-group.full,
+            .button-container {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-header">
+    <h1>Alterar dados Funcionario</h1>
+    <p>Preencha os dados abaixo para cadastrar um novo Funcionario.</p>
+</div>
+
+<div class="form-container">
+
+    <div th:if="${mensagem}"
+         class="mensagem"
+         th:text="${mensagem}">
+    </div>
+
+    <form th:action="@{/pessoas/ui/alterar/{number}(number=${pessoas.id})}"
+          th:object="${pessoas}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input
+                    type="text"
+                    id="nome"
+                    th:field="*{nome}"
+                    placeholder="Digite o nome"
+                    required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                    type="email"
+                    id="email"
+                    th:field="*{email}"
+                    placeholder="exemplo@email.com"
+                    required>
+        </div>
+
+        <div class="form-group full">
+            <label for="imgUrl">URL da Imagem</label>
+            <input
+                    type="url"
+                    id="imgUrl"
+                    th:field="*{imgUrl}"
+                    placeholder="https://exemplo.com/imagem.jpg"
+                    required>
+        </div>
+
+        <div class="form-group">
+            <label for="idade">Idade</label>
+            <input
+                    type="number"
+                    id="idade"
+                    th:field="*{idade}"
+                    placeholder="Ex: 25"
+                    min="1"
+                    required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input
+                    type="tel"
+                    id="telefone"
+                    th:field="*{telefone}"
+                    placeholder="Ex: 923 000 000"
+                    required>
+        </div>
+
+        <div class="form-group">
+            <label for="bi">BI</label>
+            <input
+                    type="text"
+                    id="bi"
+                    th:field="*{bi}"
+                    placeholder="Número do BI">
+        </div>
+
+        <div class="form-group">
+            <label for="nivel">Nível</label>
+            <input
+                    type="text"
+                    id="nivel"
+                    th:field="*{nivel}"
+                    placeholder="Ex: Senior">
+        </div>
+
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" th:field="*{sexo}" required>
+                <option value="">Selecione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="nacionalidade">Nacionalidade</label>
+            <input
+                    type="text"
+                    id="nacionalidade"
+                    th:field="*{nacionalidade}"
+                    placeholder="Ex: Angolana">
+        </div>
+
+
+        <div class="form-group">
+            <label for="tarefa">Tarefa</label>
+            <select id="tarefa" th:field="*{tarefa}" required>
+                <option value="">Selecione uma tarefa</option>
+                <option th:each="tarefa : ${tarefas}"
+                        th:value="${tarefa.id}"
+                        th:text="${tarefa.nomeDaTarefa}">
+                </option>
+            </select>
+        </div>
+
+
+        <div class="button-container">
+            <button type="submit">
+                Alterar Funcionário
+            </button>
+        </div>
+
+    </form>
+
+    <a class="back-link"
+       th:href="@{/pessoas/ui/lista}">
+        ← Voltar para a lista de Funcionario
+    </a>
+
+</div>
+
+</body>
+</html>
