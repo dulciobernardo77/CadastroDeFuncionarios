@@ -11,17 +11,17 @@ public class PessoaMapper {
     public PessoaModel map(PessoaDTO pessoaDTO){
         return PessoaModel
                 .builder()
-                .id(pessoaDTO.getId())
-                .nome(pessoaDTO.getNome())
-                .idade(pessoaDTO.getIdade())
-                .nacionalidade(pessoaDTO.getNacionalidade())
-                .bi(pessoaDTO.getBi())
-                .sexo(pessoaDTO.getSexo())
-                .email(pessoaDTO.getEmail())
-                .telefone(pessoaDTO.getTelefone())
-                .nivel(pessoaDTO.getNivel())
-                .imgUrl(pessoaDTO.getImgUrl())
-                .tarefa(pessoaDTO.getTarefa())
+                .id(pessoaDTO.id())
+                .nome(pessoaDTO.nome())
+                .idade(pessoaDTO.idade())
+                .nacionalidade(pessoaDTO.nacionalidade())
+                .bi(pessoaDTO.bi())
+                .sexo(pessoaDTO.sexo())
+                .email(pessoaDTO.email())
+                .telefone(pessoaDTO.telefone())
+                .nivel(pessoaDTO.nivel())
+                .imgUrl(pessoaDTO.imgUrl())
+                .tarefa(pessoaDTO.tarefa())
                 .build();
     }
 

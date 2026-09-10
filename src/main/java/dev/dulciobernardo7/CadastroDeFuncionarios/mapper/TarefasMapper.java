@@ -11,10 +11,10 @@ public class TarefasMapper {
     public TarefasModel map(TarefasDTO tarefasDTO){
         return TarefasModel
                 .builder()
-                .id(tarefasDTO.getId())
-                .nomeDaTarefa(tarefasDTO.getNomeDaTarefa())
-                .dificuldade(tarefasDTO.getDificuldade())
-                .pessoas(tarefasDTO.getPessoas())
+                .id(tarefasDTO.id())
+                .nomeDaTarefa(tarefasDTO.nomeDaTarefa())
+                .dificuldade(tarefasDTO.dificuldade())
+                .pessoas(tarefasDTO.pessoas())
                 .build();
     }
 
