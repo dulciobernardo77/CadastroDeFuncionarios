@@ -38,7 +38,7 @@ public class PessoaController {
     })
     public ResponseEntity<String> cadastraPessoa(@RequestBody PessoaDTO pessoaDTO) {
         PessoaDTO pessoaDTO1 = pessoaService.cadastroDeFuncionario(pessoaDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario Cadastrado" + pessoaDTO1.getNome() + " com Sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario Cadastrado" + pessoaDTO1.nome() + " com Sucesso");
     }
 
     @GetMapping("/lista")
@@ -61,7 +61,7 @@ public class PessoaController {
 
         PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(id);
         if (pessoaDTO != null) {
-            return ResponseEntity.ok("Funcionario com o IDs " + id + " encontrado: " + pessoaDTO.getNome());
+            return ResponseEntity.ok("Funcionario com o IDs " + id + " encontrado: " + pessoaDTO.nome());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + id + " Nao encontrado");
         }

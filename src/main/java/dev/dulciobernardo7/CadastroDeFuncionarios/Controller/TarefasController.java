@@ -34,7 +34,7 @@ public class TarefasController {
     public ResponseEntity<String> CadastraPessoa(@RequestBody TarefasDTO tarefasDTO) {
         TarefasDTO tarefasDTO1 = tarefasService.cadastroDeTarefas(tarefasDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Tarefa  Cadastrado: " + tarefasDTO1.getNomeDaTarefa() + " com Sucesso");
+                .body("Tarefa  Cadastrado: " + tarefasDTO1.nomeDaTarefa() + " com Sucesso");
     }
 
     @GetMapping("/lista")
@@ -56,7 +56,7 @@ public class TarefasController {
             @PathVariable Long id) {
         TarefasDTO tarefasDTO = tarefasService.ListatodasTarefasPorId(id);
         if (tarefasDTO != null) {
-            return ResponseEntity.ok("Tarefa  encontrado: " + tarefasDTO.getNomeDaTarefa());
+            return ResponseEntity.ok("Tarefa  encontrado: " + tarefasDTO.nomeDaTarefa());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + id + " Nao encontrado");
         }
