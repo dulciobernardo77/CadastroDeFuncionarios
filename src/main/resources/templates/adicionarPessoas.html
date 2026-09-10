@@ -283,6 +283,17 @@
                     placeholder="Ex: Angolana">
         </div>
 
+        <div class="form-group">
+            <label for="tarefa">Tarefa</label>
+            <select id="tarefa" th:field="*{tarefa}" required>
+                <option value="">Selecione uma tarefa</option>
+                <option th:each="tarefa : ${tarefas}"
+                        th:value="${tarefa.id}"
+                        th:text="${tarefa.nomeDaTarefa}">
+                </option>
+            </select>
+        </div>
+
         <div class="button-container">
             <button type="submit">
                 Cadastrar Ninja
