@@ -36,6 +36,10 @@ public class PessoaService {
 
     //Metodo para cadastro de fucionario
     public PessoaDTO cadastroDeFuncionario(PessoaDTO pessoaDTO){
+        if (pessoaDTO.bi() != null && pessoasRepository.existsByBi(pessoaDTO.bi())) {
+            throw new IllegalArgumentException("Já existe um funcionário com este BI.");
+        }
+
         PessoaModel pessoaModel =  pessoaMapper.map(pessoaDTO);
         pessoaModel =   pessoasRepository.save(pessoaModel);
         return  pessoaMapper.map(pessoaModel);
@@ -50,6 +54,10 @@ public class PessoaService {
     public  PessoaDTO Atualizarfuncionario(Long id, PessoaDTO pessoaDTO){
         Optional<PessoaModel> pessoaExistente = pessoasRepository.findById(id);
         if (pessoaExistente.isPresent()){
+            if (pessoaDTO.bi() != null && pessoasRepository.existsByBiAndIdNot(pessoaDTO.bi(), id)) {
+                throw new IllegalArgumentException("Já existe outro funcionário com este BI.");
+            }
+
             PessoaModel pessoaAtualizada = pessoaMapper.map(pessoaDTO);
             pessoaAtualizada.setId(id);
             PessoaModel pessoaSalva = pessoasRepository.save(pessoaAtualizada);
