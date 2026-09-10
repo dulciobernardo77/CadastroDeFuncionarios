@@ -16,7 +16,7 @@ class CadastroDeFuncionariosApplicationTests {
 	@Test
 	void pessoaDtoShouldAllowEmptySexoValueForFormBinding() {
 		PessoaDTO pessoa = new PessoaDTO();
-		assertNull(pessoa.getSexo());
+		assertNull(pessoa.sexo());
 	}
 
 }
