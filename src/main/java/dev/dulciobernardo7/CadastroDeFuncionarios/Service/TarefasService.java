@@ -24,7 +24,7 @@ public class TarefasService {
 
 
     //Metodo para lista todo as tarefas
-    public List<TarefasDTO> ListatodasTarefas(){
+    public List<TarefasDTO> listatodasTarefas(){
         List<TarefasModel> tarefasModelList = tarefasRepository.findAll();
          return tarefasModelList.stream()
                  .map(tarefasMapper::map)
@@ -32,7 +32,7 @@ public class TarefasService {
     }
 
     //Metodo para lista todo as Tarefas pelo id
-   public TarefasDTO ListatodasTarefasPorId(Long id){
+   public TarefasDTO listatodasTarefasPorId(Long id){
         Optional<TarefasModel> tarefasModel = tarefasRepository.findById(id);
         return tarefasModel.map(tarefasMapper::map)
                 .orElse(null);
@@ -46,19 +46,31 @@ public class TarefasService {
 
 
     // Metodo para Alterar dados das Tarefas (UPDATE)
-    public TarefasDTO AtualizarTarefas(Long id ,TarefasDTO tarefasDTO){
+    public TarefasDTO atualizarTarefas(Long id, TarefasDTO tarefasDTO) {
+
         Optional<TarefasModel> tarefasExistente = tarefasRepository.findById(id);
-        if (tarefasExistente.isPresent()){
-            TarefasModel tarefasAtualizadas = tarefasMapper.map(tarefasDTO);
-            tarefasAtualizadas.setId(id);
-            TarefasModel tarefaSalvas = tarefasRepository.save(tarefasAtualizadas);
-            return tarefasMapper.map(tarefaSalvas);
+
+        if (tarefasExistente.isEmpty()) {
+            return null;
         }
-        return null;
+
+        TarefasModel tarefa = tarefasExistente.get();
+
+        if (tarefasDTO.nomeDaTarefa() != null) {
+            tarefa.setNomeDaTarefa(tarefasDTO.nomeDaTarefa());
+        }
+
+        if (tarefasDTO.dificuldade() != null) {
+            tarefa.setDificuldade(tarefasDTO.dificuldade());
+        }
+
+        TarefasModel tarefaSalva = tarefasRepository.save(tarefa);
+
+        return tarefasMapper.map(tarefaSalva);
     }
 
     //Metodo para Deletar Tarefas (DELETE)
-    public void ExcluirTarefasPorId(Long id){
+    public void excluirTarefasPorId(Long id){
         tarefasRepository.deleteById(id);
     }
 
