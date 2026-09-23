@@ -45,7 +45,7 @@ public class PessoaController {
     @Operation(summary = "Listar pessoas", description = "Retorna todas as pessoas cadastradas.")
     @ApiResponse(responseCode = "200", description = "Lista de pessoas retornada com sucesso.")
     public ResponseEntity<List<PessoaDTO>> todasPessoas() {
-        List<PessoaDTO> pessoaDTOList = pessoaService.ListatodasPessoas();
+        List<PessoaDTO> pessoaDTOList = pessoaService.listatodasPessoas();
         return ResponseEntity.ok(pessoaDTOList);
     }
 
@@ -59,7 +59,7 @@ public class PessoaController {
             @Parameter(name = "id", description = "ID da pessoa", required = true, in = ParameterIn.PATH)
             @PathVariable Long id) {
 
-        PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(id);
+        PessoaDTO pessoaDTO = pessoaService.listatodasPessoasporId(id);
         if (pessoaDTO != null) {
             return ResponseEntity.ok("Funcionario com o IDs " + id + " encontrado: " + pessoaDTO.nome());
         } else {
@@ -67,7 +67,7 @@ public class PessoaController {
         }
     }
 
-    @PutMapping("/alterar/{id}")
+    @PatchMapping("/alterar/{id}")
     @Operation(summary = "Atualizar pessoa", description = "Atualiza os dados de uma pessoa existente pelo ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Pessoa atualizada com sucesso."),
@@ -77,7 +77,7 @@ public class PessoaController {
             @Parameter(name = "id", description = "ID da pessoa a ser atualizada", required = true, in = ParameterIn.PATH)
             @PathVariable Long id,
             @RequestBody PessoaDTO pessoa) {
-        PessoaDTO pessoaDTO = pessoaService.Atualizarfuncionario(id, pessoa);
+        PessoaDTO pessoaDTO = pessoaService.atualizarFuncionario(id, pessoa);
         if (pessoaDTO != null) {
             return ResponseEntity.ok(pessoaDTO);
         } else {
@@ -94,8 +94,8 @@ public class PessoaController {
     public ResponseEntity<String> ExcluirPessoaPorId(
             @Parameter(name = "id", description = "ID da pessoa a ser excluída", required = true, in = ParameterIn.PATH)
             @PathVariable Long id) {
-        if (pessoaService.ListatodasPessoasporId(id) != null) {
-            pessoaService.ExcluirPessoaPorId(id);
+        if (pessoaService.listatodasPessoasporId(id) != null) {
+            pessoaService.excluirPessoaPorId(id);
             return ResponseEntity.ok("O funcionario  com o IDs " + id + " Excluido.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Funcionario com IDs " + id + " Nao encontrado");
