@@ -20,20 +20,20 @@ public class TarefasControllerUI {
 
     @GetMapping("/lista")
     public String listarTarefas(Model model) {
-        List<TarefasDTO> tarefasDTOS = tarefasService.ListatodasTarefas();
+        List<TarefasDTO> tarefasDTOS = tarefasService.listatodasTarefas();
         model.addAttribute("tarefas", tarefasDTOS);
         return "listaTarefas";
     }
 
     @GetMapping("/deletar/{number}")
     public String excluirTarefaPorId(@PathVariable Long number) {
-        tarefasService.ExcluirTarefasPorId(number);
+        tarefasService.excluirTarefasPorId(number);
         return "redirect:/tarefas/ui/lista";
     }
 
     @GetMapping("/lista/{number}")
     public String mostrarTarefaPorId(@PathVariable Long number, Model model) {
-        TarefasDTO tarefasDTO = tarefasService.ListatodasTarefasPorId(number);
+        TarefasDTO tarefasDTO = tarefasService.listatodasTarefasPorId(number);
         if (tarefasDTO != null) {
             model.addAttribute("tarefas", tarefasDTO);
             return "detalhesTarefas";

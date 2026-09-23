@@ -25,20 +25,20 @@ public class PessoaControllerUI {
 
     @GetMapping("/lista")
     public String TodasPessoas(Model model){
-        List<PessoaDTO> pessoaDTOList = pessoaService.ListatodasPessoas();
+        List<PessoaDTO> pessoaDTOList = pessoaService.listatodasPessoas();
         model.addAttribute("pessoas",pessoaDTOList);
         return "listaPessoas";
     }
 
     @GetMapping("/deletar/{number}")
     public String ExcluirPessoaPorId(@PathVariable Long number ){
-        pessoaService.ExcluirPessoaPorId(number);
+        pessoaService.excluirPessoaPorId(number);
         return "redirect:/pessoas/ui/lista";
     }
 
     @GetMapping("/lista/{number}")
     public String MostrarTodasPessoasPorId(@PathVariable Long number, Model model){
-        PessoaDTO pessoaDTO =  pessoaService.ListatodasPessoasporId(number);
+        PessoaDTO pessoaDTO =  pessoaService.listatodasPessoasporId(number);
         if (pessoaDTO != null){
             model.addAttribute("pessoas",pessoaDTO);
             return "detalhesPessoas";
@@ -52,19 +52,19 @@ public class PessoaControllerUI {
     @GetMapping("/adicionar")
     public String mostrarFormularioAdicionarFuncionario(Model model) {
         model.addAttribute("pessoas",new PessoaDTO());
-        model.addAttribute("tarefas", tarefasService.ListatodasTarefas());
+        model.addAttribute("tarefas", tarefasService.listatodasTarefas());
         return "adicionarPessoas";
     }
 
     @GetMapping("/altera/{number}")
     public String mostrarFormularioAlteradoFuncionario(@PathVariable Long number, Model model) {
-        PessoaDTO pessoaDTO = pessoaService.ListatodasPessoasporId(number);
+        PessoaDTO pessoaDTO = pessoaService.listatodasPessoasporId(number);
         if (pessoaDTO == null) {
             return "redirect:/pessoas/ui/lista";
         }
 
         model.addAttribute("pessoas", pessoaDTO);
-        model.addAttribute("tarefas", tarefasService.ListatodasTarefas());
+        model.addAttribute("tarefas", tarefasService.listatodasTarefas());
         return "alterarPessoas";
     }
 
@@ -73,7 +73,7 @@ public class PessoaControllerUI {
                                 @ModelAttribute PessoaDTO pessoaDTO,
                                 RedirectAttributes redirectAttributes) {
         try {
-            pessoaService.Atualizarfuncionario(number, pessoaDTO);
+            pessoaService.atualizarFuncionario(number, pessoaDTO);
             redirectAttributes.addFlashAttribute("mensagem", "Funcionario alterado com sucesso!");
         } catch (IllegalArgumentException exception) {
             redirectAttributes.addFlashAttribute("mensagem", exception.getMessage());
