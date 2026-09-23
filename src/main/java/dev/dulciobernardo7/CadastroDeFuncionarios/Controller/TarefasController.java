@@ -41,7 +41,7 @@ public class TarefasController {
     @Operation(summary = "Listar tarefas", description = "Retorna todas as tarefas cadastradas.")
     @ApiResponse(responseCode = "200", description = "Lista de tarefas retornada com sucesso.")
     public ResponseEntity<List<TarefasDTO>> TodasPessoas() {
-        List<TarefasDTO> tarefasDTOS = tarefasService.ListatodasTarefas();
+        List<TarefasDTO> tarefasDTOS = tarefasService.listatodasTarefas();
         return ResponseEntity.ok(tarefasDTOS);
     }
 
@@ -54,7 +54,7 @@ public class TarefasController {
     public ResponseEntity<String> MostrarTodasPessoasPorId(
             @Parameter(name = "id", description = "ID da tarefa", required = true, in = ParameterIn.PATH)
             @PathVariable Long id) {
-        TarefasDTO tarefasDTO = tarefasService.ListatodasTarefasPorId(id);
+        TarefasDTO tarefasDTO = tarefasService.listatodasTarefasPorId(id);
         if (tarefasDTO != null) {
             return ResponseEntity.ok("Tarefa  encontrado: " + tarefasDTO.nomeDaTarefa());
         } else {
@@ -62,7 +62,7 @@ public class TarefasController {
         }
     }
 
-    @PutMapping("/altera/{number}")
+    @PatchMapping("/altera/{number}")
     @Operation(summary = "Atualizar tarefa", description = "Atualiza os dados de uma tarefa existente pelo ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Tarefa atualizada com sucesso."),
@@ -72,7 +72,7 @@ public class TarefasController {
             @Parameter(name = "id", description = "ID da tarefa a ser atualizada", required = true, in = ParameterIn.PATH)
             @PathVariable Long id,
             @RequestBody TarefasDTO tarefas) {
-        TarefasDTO tarefasDTO = tarefasService.AtualizarTarefas(id, tarefas);
+        TarefasDTO tarefasDTO = tarefasService.atualizarTarefas(id, tarefas);
         if (tarefasDTO != null) {
             return ResponseEntity.ok(tarefasDTO);
         } else {
@@ -89,8 +89,8 @@ public class TarefasController {
     public ResponseEntity<String> ExcluirPessoaPorId(
             @Parameter(name = "id", description = "ID da tarefa a ser excluída", required = true, in = ParameterIn.PATH)
             @PathVariable Long id) {
-        if (tarefasService.ListatodasTarefasPorId(id) != null) {
-            tarefasService.ExcluirTarefasPorId(id);
+        if (tarefasService.listatodasTarefasPorId(id) != null) {
+            tarefasService.excluirTarefasPorId(id);
             return ResponseEntity.ok("O funcionario  com o IDs " + id + " Excluido.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ninja com IDs " + id + " Nao encontrado");
