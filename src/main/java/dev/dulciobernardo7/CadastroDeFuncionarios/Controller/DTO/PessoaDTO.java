@@ -8,7 +8,7 @@ import lombok.Builder;
 public record PessoaDTO (
      Long id,
      String nome,
-     int idade,
+     Integer idade,
      String nacionalidade,
      String bi,
      Character sexo,
