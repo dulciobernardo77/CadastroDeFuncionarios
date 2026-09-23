@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class PessoaController {
             @ApiResponse(responseCode = "201", description = "Pessoa cadastrada com sucesso."),
             @ApiResponse(responseCode = "400", description = "Dados inválidos para cadastro.")
     })
-    public ResponseEntity<String> cadastraPessoa(@RequestBody PessoaDTO pessoaDTO) {
+    public ResponseEntity<String> cadastraPessoa(@Valid @RequestBody PessoaDTO pessoaDTO) {
         PessoaDTO pessoaDTO1 = pessoaService.cadastroDeFuncionario(pessoaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario Cadastrado" + pessoaDTO1.nome() + " com Sucesso");
     }
@@ -76,7 +77,7 @@ public class PessoaController {
     public ResponseEntity<?> AlteraPorId(
             @Parameter(name = "id", description = "ID da pessoa a ser atualizada", required = true, in = ParameterIn.PATH)
             @PathVariable Long id,
-            @RequestBody PessoaDTO pessoa) {
+            @Valid @RequestBody PessoaDTO pessoa) {
         PessoaDTO pessoaDTO = pessoaService.atualizarFuncionario(id, pessoa);
         if (pessoaDTO != null) {
             return ResponseEntity.ok(pessoaDTO);

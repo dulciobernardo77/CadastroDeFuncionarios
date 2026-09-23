@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class TarefasController {
             @ApiResponse(responseCode = "201", description = "Tarefa cadastrada com sucesso."),
             @ApiResponse(responseCode = "400", description = "Dados inválidos para o cadastro.")
     })
-    public ResponseEntity<String> CadastraPessoa(@RequestBody TarefasDTO tarefasDTO) {
+    public ResponseEntity<String> CadastraPessoa(@Valid @RequestBody TarefasDTO tarefasDTO) {
         TarefasDTO tarefasDTO1 = tarefasService.cadastroDeTarefas(tarefasDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Tarefa  Cadastrado: " + tarefasDTO1.nomeDaTarefa() + " com Sucesso");
@@ -71,6 +72,7 @@ public class TarefasController {
     public ResponseEntity<?> AlteraPorId(
             @Parameter(name = "id", description = "ID da tarefa a ser atualizada", required = true, in = ParameterIn.PATH)
             @PathVariable Long id,
+            @Valid
             @RequestBody TarefasDTO tarefas) {
         TarefasDTO tarefasDTO = tarefasService.atualizarTarefas(id, tarefas);
         if (tarefasDTO != null) {
