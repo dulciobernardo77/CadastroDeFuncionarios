@@ -2,12 +2,13 @@ package dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO;
 
 import dev.dulciobernardo7.CadastroDeFuncionarios.Entity.*;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 
 @Builder
 public record PessoaDTO (
      Long id,
-     String nome,
+    @NotEmpty (message = "O nome do Funcionario e obrigatorio") String nome,
      Integer idade,
      String nacionalidade,
      String bi,
