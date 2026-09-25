@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Cadastro de Funcionários</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="auth-shell">
+    <div class="auth-card">
+        <div class="brand"><span>CF</span> Cadastro de Funcionários</div>
+        <h1>Criar conta</h1>
+        <p class="subtitle">Preencha os dados abaixo para registrar-se.</p>
+
+        <div th:if="${erro}" class="alert alert-error" th:text="${erro}"></div>
+        <div th:if="${mensagem}" class="alert alert-success" th:text="${mensagem}"></div>
+
+        <form th:action="@{/register}" th:object="${usuario}" method="post">
+            <label>
+                Nome
+                <input type="text" th:field="*{nome}" placeholder="Seu nome completo" required>
+            </label>
+
+            <label>
+                E-mail
+                <input type="email" th:field="*{email}" placeholder="seu@email.com" required>
+            </label>
+
+            <label>
+                Senha
+                <input type="password" th:field="*{senha}" placeholder="Crie uma senha" required>
+            </label>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <p class="switch-link">
+            Já possui uma conta? <a th:href="@{/login}">Faça login</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

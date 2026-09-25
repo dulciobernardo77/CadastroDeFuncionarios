@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Cadastro de Funcionários</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+<body>
+<div class="auth-shell">
+    <div class="auth-card">
+        <div class="brand"><span>CF</span> Cadastro de Funcionários</div>
+        <h1>Entrar</h1>
+        <p class="subtitle">Use seu e-mail e senha para acessar o sistema.</p>
+
+        <div th:if="${param.error}" class="alert alert-error">E-mail ou senha inválidos.</div>
+        <div th:if="${param.logout}" class="alert alert-success">Você saiu com sucesso.</div>
+        <div th:if="${mensagem}" class="alert alert-success" th:text="${mensagem}"></div>
+
+        <form th:action="@{/login}" method="post">
+            <label>
+                E-mail
+                <input type="email" name="email" placeholder="seu@email.com" required autofocus>
+            </label>
+
+            <label>
+                Senha
+                <input type="password" name="senha" placeholder="Digite sua senha" required>
+            </label>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p class="switch-link">
+            Ainda não tem conta? <a th:href="@{/register}">Crie uma conta</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
