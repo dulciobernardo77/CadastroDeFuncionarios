@@ -1,5 +1,7 @@
 package dev.dulciobernardo7.CadastroDeFuncionarios.Config;
 
+import dev.dulciobernardo7.CadastroDeFuncionarios.Exception.UsenameOrPasswordInvalidExceptions;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +15,11 @@ import java.util.Map;
 @RestControllerAdvice
 public class AplicationControllerAdvice {
 
+    @ExceptionHandler(UsenameOrPasswordInvalidExceptions.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleNotFoundException(UsenameOrPasswordInvalidExceptions ex){
+        return ex.getMessage();
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
