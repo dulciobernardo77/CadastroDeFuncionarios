@@ -1,6 +1,6 @@
 package dev.dulciobernardo7.CadastroDeFuncionarios.Controller;
 
-import dev.dulciobernardo7.CadastroDeFuncionarios.Config.TokenSecurity;
+import dev.dulciobernardo7.CadastroDeFuncionarios.Config.TokenService;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.LoginDTO;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.LoginToken;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Controller.DTO.UserDTO;
@@ -24,7 +24,7 @@ public class AuthController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-    private final TokenSecurity tokensecurity;
+    private final TokenService tokensecurity;
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO){
