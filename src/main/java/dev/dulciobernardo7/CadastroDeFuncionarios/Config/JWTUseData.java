@@ -1,4 +1,7 @@
 package dev.dulciobernardo7.CadastroDeFuncionarios.Config;
 
-public record JWTUseData() {
+import lombok.Builder;
+
+@Builder
+public record JWTUseData(Long id,String nome,String email) {
 }
