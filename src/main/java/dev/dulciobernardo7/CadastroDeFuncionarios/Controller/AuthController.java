@@ -8,6 +8,10 @@ import dev.dulciobernardo7.CadastroDeFuncionarios.Entity.User;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Exception.UsenameOrPasswordInvalidExceptions;
 import dev.dulciobernardo7.CadastroDeFuncionarios.Service.UserService;
 import dev.dulciobernardo7.CadastroDeFuncionarios.mapper.UserMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cadastrodefuncionarios/auth")
 @RequiredArgsConstructor
+@Tag(name = "Autenticação", description = "Operações para cadastro de usuário e autenticação")
 public class AuthController {
 
     private final UserService userService;
@@ -27,6 +32,11 @@ public class AuthController {
     private final TokenService tokensecurity;
 
     @PostMapping("/register")
+    @Operation(summary = "Cadastrar usuário", description = "Cria uma conta de usuário e retorna os dados cadastrados.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos ou senha obrigatória.")
+    })
     public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO){
         User userSave = userService.Save(UserMapper.map(userDTO));
         return ResponseEntity
@@ -35,6 +45,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Autenticar usuário", description = "Valida e-mail e senha e retorna um token de autenticação.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Autenticação realizada com sucesso."),
+            @ApiResponse(responseCode = "400", description = "E-mail ou senha inválidos.")
+    })
     public ResponseEntity<LoginToken> login(@RequestBody LoginDTO loginDTO){
         try {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDTO.email(), loginDTO.Senha());
