@@ -39,6 +39,11 @@ public class SecurityConfig {
                                 "/images/**",
                                 "/cadastrodefuncionarios/auth/**"
                         ).permitAll()
+                        // Swagger / OpenAPI
+                        .requestMatchers("/api/api-docs/**").permitAll()
+                        .requestMatchers("/swagger/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
