@@ -1,202 +1,305 @@
-# 📋 Cadastro de Pessoas
+# Cadastro de Funcionários
 
-Um sistema web desenvolvido em **Spring Boot** para gerenciar pessoas e tarefas, com interface visual em Thymeleaf e relacionamento entre entidades. O projeto inclui listagem, cadastro, detalhes e navegação para as telas de pessoas e tarefas, com layout padronizado e correções de fluxo na camada UI.
+Sistema completo em Java com Spring Boot para gestão de funcionários, tarefas e autenticação de usuários. O projeto combina API REST, interface web em Thymeleaf e segurança com JWT, oferecendo cadastro, listagem, edição, exclusão e login funcional.
 
-## 🎯 Funcionalidades
+## Visão geral
 
-- **Gerenciamento de Pessoas**
-  - ✅ Cadastrar novas pessoas
-  - ✅ Listar todas as pessoas
-  - ✅ Visualizar detalhes completos de uma pessoa
-  - ✅ Excluir pessoa do sistema
-  - ✅ Visualização de tarefa atribuída em detalhes
+Este projeto foi desenvolvido para registrar funcionários e associá-los a tarefas, além de permitir acesso seguro à aplicação por meio de autenticação. A estrutura inclui:
 
-- **Gerenciamento de Tarefas**
-  - ✅ Criar novas tarefas
-  - ✅ Listar todas as tarefas
-  - ✅ Visualizar detalhes de uma tarefa
-  - ✅ Excluir tarefa
-  - ✅ Exibir funcionários vinculados à tarefa
+- API REST para pessoas e tarefas
+- Interface web em Thymeleaf para uso direto no navegador
+- Autenticação de usuários com Spring Security + JWT
+- Persistência com PostgreSQL e migrações via Flyway
+- Documentação automática com Swagger/OpenAPI
 
-- **Interface Web**
-  - ✅ Layout visual consistente nas telas de pessoas e tarefas
-  - ✅ Formulários com estrutura moderna e responsiva
-  - ✅ Navegação entre listagem, cadastro e detalhes
-  - ✅ Correções de rotas, binding de model e links quebrados
+## Funcionalidades
 
-## 🛠️ Tecnologias Utilizadas
+### Usuários e autenticação
+- Cadastro de usuário
+- Login com e-mail e senha
+- Geração de token JWT
+- Rotas públicas para login, cadastro e documentação
 
-| Tecnologia | Versão | Descrição |
-|-----------|--------|-----------|
-| Java | 17 | Linguagem de programação |
-| Spring Boot | 4.0.7 | Framework principal |
-| Spring Data JPA | - | ORM e persistência |
-| Spring Web MVC | - | API REST |
-| Thymeleaf | - | Template HTML |
-| Flyway | - | Migração de banco de dados |
-| Lombok | - | Redução de boilerplate |
-| Maven | - | Gerenciador de dependências |
+### Gestão de funcionários
+- Cadastro de funcionários
+- Listagem geral
+- Busca por ID
+- Atualização de dados
+- Exclusão
 
-## 📦 Estrutura do Projeto
+### Gestão de tarefas
+- Cadastro de tarefas
+- Listagem geral
+- Busca por ID
+- Atualização
+- Exclusão
+- Associação com funcionários
 
+### Interface web
+- Página de login
+- Página de cadastro
+- Listagem de funcionários
+- Detalhes de funcionário
+- Formulário de edição
+- Listagem de tarefas e páginas associadas
+
+## Stack tecnológica
+
+| Tecnologia | Uso |
+|-----------|-----|
+| Java 17 | Linguagem principal |
+| Spring Boot 4.0.7 | Framework principal |
+| Spring Web MVC | API e controllers |
+| Spring Data JPA | Persistência e ORM |
+| Spring Security | Autenticação e autorização |
+| JWT (java-jwt) | Geração e validação de tokens |
+| Thymeleaf | Views HTML |
+| PostgreSQL | Banco de dados principal |
+| Flyway | Migrações de banco |
+| Lombok | Redução de boilerplate |
+| OpenAPI/Swagger | Documentação da API |
+| Maven | Build e gerenciamento de dependências |
+
+## Estrutura do projeto
+
+```text
+src/
+├── main/
+│   ├── java/dev/dulciobernardo7/CadastroDeFuncionarios/
+│   │   ├── Config/
+│   │   │   ├── SecurityConfig.java
+│   │   │   ├── SecurityFilter.java
+│   │   │   ├── TokenService.java
+│   │   │   └── SwaggerConfig.java
+│   │   ├── Controller/
+│   │   │   ├── AuthController.java
+│   │   │   ├── AuthViewController.java
+│   │   │   ├── PessoaController.java
+│   │   │   ├── PessoaControllerUI.java
+│   │   │   ├── TarefasController.java
+│   │   │   └── TarefasControllerUI.java
+│   │   ├── Controller/DTO/
+│   │   │   ├── LoginDTO.java
+│   │   │   ├── LoginToken.java
+│   │   │   ├── PessoaDTO.java
+│   │   │   ├── TarefasDTO.java
+│   │   │   └── UserDTO.java
+│   │   ├── Entity/
+│   │   │   ├── PessoaModel.java
+│   │   │   ├── TarefasModel.java
+│   │   │   └── User.java
+│   │   ├── Exception/
+│   │   │   └── UsenameOrPasswordInvalidExceptions.java
+│   │   ├── Repository/
+│   │   │   ├── PessoasRepository.java
+│   │   │   ├── TarefasRepository.java
+│   │   │   └── UserRepository.java
+│   │   ├── Service/
+│   │   │   ├── AuthService.java
+│   │   │   ├── PessoaService.java
+│   │   │   ├── TarefasService.java
+│   │   │   └── UserService.java
+│   │   ├── mapper/
+│   │   │   ├── PessoaMapper.java
+│   │   │   ├── TarefasMapper.java
+│   │   │   └── UserMapper.java
+│   │   └── CadastroDeFuncionariosApplication.java
+│   └── resources/
+│       ├── application.yaml
+│       ├── db/migration/
+│       │   ├── V1__create_table_tarefas.sql
+│       │   ├── V2__create_table_pessoas.sql
+│       │   └── V3__create_table_users.sql
+│       ├── static/
+│       │   └── css/auth.css
+│       └── templates/
+│           ├── adicionarPessoas.html
+│           ├── adicionarTarefas.html
+│           ├── alterarPessoas.html
+│           ├── detalhesPessoas.html
+│           ├── detalhesTarefas.html
+│           ├── listaPessoas.html
+│           ├── listaTarefas.html
+│           ├── login.html
+│           └── register.html
 ```
-src/main/java/dev/dulciobernardo7/CadastroDePessoas/
-├── Pessoas/
-│   ├── PessoaModel.java         # Entidade de Pessoa
-│   ├── PessoaDTO.java           # Data Transfer Object
-│   ├── PessoaController.java    # API REST
-│   ├── PessoaControllerUI.java  # Interface web de pessoas
-│   ├── PessoaService.java       # Lógica de negócio
-│   ├── PessoaMapper.java        # Mapeamento DTO/Model
-│   └── PessoasRepository.java   # Acesso a dados
-├── Tarefas/
-│   ├── TarefasModel.java        # Entidade de Tarefa
-│   ├── TarefasDTO.java          # Data Transfer Object
-│   ├── TarefasController.java   # API REST
-│   ├── TarefasControllerUI.java # Interface web de tarefas
-│   ├── TarefasService.java      # Lógica de negócio
-│   ├── TarefasMapper.java       # Mapeamento DTO/Model
-│   └── TarefasRepository.java   # Acesso a dados
-└── CadastroDePessoaApplication.java # Classe principal
 
-src/main/resources/
-├── templates/
-│   ├── listaPessoas.html
-│   ├── adicionarPessoas.html
-│   ├── detalhesPessoas.html
-│   ├── listaTarefas.html
-│   ├── adicionarTarefas.html
-│   └── detalhesTarefas.html
-├── static/
-├── db/migrations/
-└── application.properties
-```
+## Requisitos
 
-## 🚀 Como Executar
-
-### Pré-requisitos
-
-- Java 17 ou superior
+- Java 17+
 - Maven 3.6+
-- Banco de dados (H2, PostgreSQL ou MySQL conforme configurado)
+- PostgreSQL 12+
+- Git
 
-### Instalação
+## Configuração do ambiente
 
-1. **Clone o repositório**
-```bash
-git clone https://github.com/dulciobernardo77/CadastroDePessoas.git
-cd CadastroDePessoas
+O projeto usa o arquivo `src/main/resources/application.yaml` para configurar a conexão com o banco e a segurança.
+
+Exemplo de configuração:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cadastrodepessoas
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+
+cadastrodefuncionario:
+  security:
+    secret: palava-secreta
 ```
 
-2. **Instale as dependências**
+Crie o banco `cadastrodepessoas` no PostgreSQL antes de iniciar a aplicação.
+
+## Como executar
+
+### 1) Clone o repositório
+
+```bash
+git clone https://github.com/dulciobernardo77/CadastroDeFuncionarios.git
+cd CadastroDeFuncionarios
+```
+
+### 2) Compile e baixe dependências
+
 ```bash
 mvn clean install
 ```
 
-3. **Execute a aplicação**
+### 3) Inicie a aplicação
+
 ```bash
 mvn spring-boot:run
 ```
 
-A aplicação estará disponível em `http://localhost:8080`
+A aplicação ficará disponível em:
 
-## 📡 Endpoints da API
+- Frontend web: `http://localhost:8080/login`
+- Swagger UI: `http://localhost:8080/swagger/index.html`
+- OpenAPI docs: `http://localhost:8080/api/api-docs`
 
-### Pessoas
+## Endpoints principais
+
+### Autenticação
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| GET | `/pessoas/boavindas` | Mensagem de boas-vindas |
-| POST | `/pessoas/cadastrar` | Cadastrar nova pessoa |
-| GET | `/pessoas/lista` | Listar todas as pessoas |
-| GET | `/pessoas/{id}` | Obter detalhes de uma pessoa |
-| PUT | `/pessoas/{id}` | Atualizar pessoa |
-| DELETE | `/pessoas/{id}` | Deletar pessoa |
+| POST | `/cadastrodefuncionarios/auth/register` | Cadastro de usuário |
+| POST | `/cadastrodefuncionarios/auth/login` | Login e geração de token |
+
+### Funcionários
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/pessoas/boavindas` | Mensagem inicial |
+| POST | `/pessoas/cadastrar` | Cadastrar pessoa/funcionário |
+| GET | `/pessoas/lista` | Listar todos |
+| GET | `/pessoas/lista/{id}` | Buscar por ID |
+| PATCH | `/pessoas/alterar/{id}` | Atualizar |
+| DELETE | `/pessoas/deletar/{id}` | Excluir |
 
 ### Tarefas
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| POST | `/tarefas/cadastrar` | Cadastrar nova tarefa |
-| GET | `/tarefas/lista` | Listar todas as tarefas |
-| GET | `/tarefas/{id}` | Obter detalhes de uma tarefa |
-| PUT | `/tarefas/{id}` | Atualizar tarefa |
-| DELETE | `/tarefas/{id}` | Deletar tarefa |
+| POST | `/tarefas/cadastrar` | Cadastrar tarefa |
+| GET | `/tarefas/lista` | Listar todas |
+| GET | `/tarefas/lista/{id}` | Buscar por ID |
+| PATCH | `/tarefas/altera/{id}` | Atualizar |
+| DELETE | `/tarefas/Deletar/{id}` | Excluir |
 
-### Interface Web
+### Interface web
 
 | Rota | Descrição |
 |------|-----------|
-| `/pessoas/ui/lista` | Página de listagem de pessoas |
-| `/pessoas/ui/adicionar` | Formulário de cadastro de pessoa |
-| `/pessoas/ui/lista/{id}` | Detalhes de uma pessoa |
-| `/tarefas/ui/lista` | Página de listagem de tarefas |
-| `/tarefas/ui/adicionar` | Formulário de cadastro de tarefa |
-| `/tarefas/ui/lista/{id}` | Detalhes de uma tarefa |
+| `/` | Redireciona para `/login` |
+| `/login` | Página de autenticação |
+| `/register` | Página de cadastro de usuário |
+| `/pessoas/ui/lista` | Lista de funcionários |
+| `/pessoas/ui/adicionar` | Formulário de cadastro |
+| `/pessoas/ui/lista/{id}` | Detalhes do funcionário |
+| `/tarefas/ui/lista` | Lista de tarefas |
+| `/tarefas/ui/adicionar` | Formulário de tarefa |
 
-## 📋 Modelo de Dados
+## Modelos principais
+
+### User
+- id
+- nome
+- email
+- senha
 
 ### Pessoa
-- **ID**: Identificador único
-- **Nome**: Nome completo
-- **Idade**: Idade em anos
-- **Nacionalidade**: País de origem
-- **BI**: Documento de identificação
-- **Sexo**: Gênero
-- **Email**: Email único
-- **Telefone**: Número único
-- **Nível**: Nível ou cargo
-- **Imagem URL**: Link para foto
-- **Tarefa**: Referência à tarefa atribuída
+- id
+- nome
+- idade
+- nacionalidade
+- bi
+- sexo
+- email
+- telefone
+- nivel
+- imagemUrl
+- tarefa
 
 ### Tarefa
-- **ID**: Identificador único
-- **Nome da Tarefa**: Descrição/título
-- **Dificuldade**: Nível de dificuldade
-- **Pessoas**: Lista de funcionários vinculados à tarefa
+- id
+- nomeDaTarefa
+- dificuldade
+- pessoas
 
-## 🔄 Migração de Banco de Dados
+## Segurança
 
-As migrações são gerenciadas automaticamente pelo Flyway. Novo scripts de migração devem ser adicionados em:
+A aplicação utiliza Spring Security com autenticação por usuário/senha e geração de token JWT para acesso às rotas protegidas. As rotas públicas incluem:
+
+- `/`
+- `/login`
+- `/register`
+- `/css/**`
+- `/cadastrodefuncionarios/auth/**`
+- `/api/api-docs/**`
+- `/swagger/**`
+
+## Migrações
+
+As alterações de banco são gerenciadas automaticamente pelo Flyway. Os scripts ficam em:
+
+```text
+src/main/resources/db/migration/
 ```
-src/main/resources/db/migrations/
-```
 
-## 🛣️ Roadmap
+## Roadmap
 
-- [ ] Autenticação e autorização
-- [ ] Sistema de roles/permissões
-- [ ] Paginação em listagens
-- [ ] Filtros avançados
-- [ ] Edição de pessoa e tarefa via UI
-- [ ] Relatórios em PDF
-- [ ] Notificações por email
-- [ ] Testes unitários e integração mais robustos
-- [ ] Docker support
+- [ ] Melhorar fluxo de autenticação com refresh token
+- [ ] Implementar paginação nas listagens
+- [ ] Adicionar filtros e buscas avançadas
+- [ ] Melhorar validações e mensagens de erro
+- [ ] Cobrir com testes unitários e de integração
+- [ ] Adicionar containerização com Docker
 
-## 🤝 Contribuição
+## Contribuição
 
-Contribuições são bem-vindas! Por favor:
+Contribuições são bem-vindas. Para colaborar:
 
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+1. Faça um fork do projeto
+2. Crie uma branch para a sua funcionalidade
+3. Commit suas alterações
+4. Abra um pull request
 
-## 📝 Licença
+## Licença
 
-Este projeto está sob licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está em desenvolvimento e pode ser usado para fins educacionais e pessoais.
 
-## 👨‍💻 Autor
+## Autor
 
-**Dulcio Bernardo**
+Dulcio Bernardo
+
 - GitHub: [@dulciobernardo77](https://github.com/dulciobernardo77)
-
-## 📞 Suporte
-
-Para dúvidas ou problemas, abra uma issue no repositório ou entre em contato através do email.
 
 ---
 
-**Última atualização**: 2026-08-29
+Última atualização: 2026-10-01
